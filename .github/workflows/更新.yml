@@ -1,0 +1,29 @@
+name: 更新比特币信号
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install requests pandas ta
+      - name: 运行信号程序
+        run: python signal.py
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      - name: 提交更改
+        run: |
+          git config user.name "机器人"
+          git config user.email "robot@example.com"
+          git add 网页.html
+          git diff --quiet && git diff --staged --quiet || git commit -m "自动更新信号"
+          git push
