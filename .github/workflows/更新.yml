@@ -15,7 +15,7 @@ jobs:
       - name: 安装依赖
         run: |
           pip install --upgrade pip
-          pip install requests pandas ta
+          pip install requests pandas==1.5.3 ta==.10.2
       - name: 运行信号程序
         run: python signal.py
         env:
