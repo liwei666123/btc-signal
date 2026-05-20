@@ -11,12 +11,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.10'             
       - name: 安装依赖
         run: |
           pip install --upgrade pip
-          pip install requests pandas==1.5.3 ta==.10.2
-      - name: 运行信号程序
+          pip install requests
+          pip install pandas==1.5.3
+          pip install ta==0.9.0
         run: python signal.py
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
